@@ -1,4 +1,4 @@
-name: Unzip and Overwrite
+name: Unzip, Configure Git, and Push
 
 on:
   push:
@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Set Git identity
+        run: |
+          git config --local user.email "iriyamitsuki@gmail.com"
+          git config --local user.name "IriyaMitsuki"
       - name: Unzip project
         run: |
           unzip project.zip -d .
@@ -17,5 +21,5 @@ jobs:
       - name: Add and commit changes
         run: |
           git add .
-          git commit -m "Overwriting everything!" --allow-empty
-          git push origin main --force
+          git commit -m "Updating project files"
+          git push origin main
