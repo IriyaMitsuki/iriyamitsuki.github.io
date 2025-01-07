@@ -1,4 +1,4 @@
-name: Unzip Project
+name: Unzip and Overwrite
 
 on:
   push:
@@ -6,10 +6,16 @@ on:
       - main
 
 jobs:
-  unzip:
+  unzip-and-push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Unzip project
         run: |
-          unzip project.zip -d . && rm -rf project.zip && rm -rf some_important_directory/*
+          unzip project.zip -d .
+          rm -rf project.zip
+      - name: Add and commit changes
+        run: |
+          git add .
+          git commit -m "Overwriting everything!" --allow-empty
+          git push origin main --force
