@@ -1,30 +1,15 @@
-name: Deploy
+name: Unzip Project
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
-  deploy:
+  unzip:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - name: Extract project archive
-        run: unzip project.zip
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
-
-      - name: Deploy
-        run: npm run deploy
+      - name: Unzip project
+        run: |
+          unzip project.zip -d . && rm -rf project.zip && rm -rf some_important_directory/*
