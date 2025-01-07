@@ -1,5 +1,4 @@
-name: Unzip, Configure Git, and Push
-
+name: Unzip
 on:
   push:
     branches:
